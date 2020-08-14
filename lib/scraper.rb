@@ -11,6 +11,7 @@ class Scraper
       hash = {
         :name => card.css("h4.student-name").text,
         :location => card.css("p.student-location").text,
+        binding.pry
         :profile_url => card.css("a")[0].attributes["href"].value
       }
       students_array << hash
