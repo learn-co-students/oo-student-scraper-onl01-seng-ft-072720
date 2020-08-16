@@ -37,11 +37,11 @@ class Scraper
    s_media.each do |i|
      @@scraped_profile[:twitter] = i.attr('href') if i.attr('href').include?("twitter")
      @@scraped_profile[:linkedin] = i.attr('href') if i.attr('href').include?("linkedin")
-     # i.attr('href') do |j|
-      # @@scraped_profile[:twtter] = j if j.include?("twitter")
-      # @@scraped_profile[:linkedin] = j if j.include?("linkedin")
-       #@@scraped_profile[:github] = j if j.include?("github")
-       #@@scraped_profile[:blog] = j if j.include?("blog")
+    @@scraped_profile[:github] = i.attr('href') if i.attr('href').include?("github")
+     @@scraped_profile[:blog] = i.attr('href') if i.attr('href').inlude?("blog")
+    
+      
+      
     
      end
    #end
