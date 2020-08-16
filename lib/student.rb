@@ -6,10 +6,13 @@ class Student
 
   def initialize(student_hash)
     student_hash.each do |key, value|
-      @name = value if key = ":name"
-      @location = value if key = ":location"
-    
-    
+      @name = student_hash[:name]
+      @location = student_hash[:location]
+      @twitter = student_hash[:twitter]
+      @@all.push(self)
+      
+    end
+   # binding.pry
   end
 
   def self.create_from_collection(students_array)
@@ -21,7 +24,7 @@ class Student
   end
 
   def self.all
-    
+    @@all
   end
 end
 
