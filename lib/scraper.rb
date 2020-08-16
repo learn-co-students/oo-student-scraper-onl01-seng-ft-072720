@@ -38,18 +38,29 @@ class Scraper
    i = 0 
    j = s_media.length
    
-   while i < j-1 do 
-     scraped_profile[:twitter] = s_media[i].attr('href') if s_media[i].attr('href').include?("twitter")
-     scraped_profile[:linkedin] = s_media[i].attr('href') if s_media[i].attr('href').include?("linkedin")
-    scraped_profile[:github] = s_media[i].attr('href') if s_media[i].attr('href').include?("github")
-     scraped_profile[:blog] = s_media[i].attr('href') if (i == j-1) && j-1 > scraped_profile.length
-     i += 1
-   end
+   while i < j do 
+    if s_media[i].attr('href').include?("twitter") == true 
+     scraped_profile[:twitter] = s_media[i].attr('href') 
+     elsif
+     s_media[i].attr('href').include?("linkedin") == true
+     scraped_profile[:linkedin] = s_media[i].attr('href')
+   elsif
+   s_media[i].attr('href').include?("github") == true
+    scraped_profile[:github] = s_media[i].attr('href') 
+    elsif
+    (s_media[i].attr('href').include?("twitter") || s_media[i].attr('href').include?("linkedin") || s_media[i].attr('href').include?("github")) == FALSE
+      scraped_profile[:blog] = s_media[i].attr('href')
+    end
+        i += 1
+  end
+    
+ 
+ 
   
     scraped_profile[:profile_quote] = doc.css(".profile-quote").text
     scraped_profile[:bio] = doc.css("div.description-holder p").text
     scraped_profile
-    #binding.pry
+  #binding.pry
  end # ends method 
    
   
