@@ -6,12 +6,13 @@ require 'nokogiri'
 class Scraper
 
 @@scraped_students = []
+@@scraped_profile = {}
 
   def self.scrape_index_page(index_url)
     
     html = open(index_url)
     doc = Nokogiri::HTML(html)
-# binding.pry
+
     doc.css(".student-card").each do |i|
        temp_hash = {}
    
@@ -24,10 +25,32 @@ class Scraper
   @@scraped_students.push(temp_hash)
       end
   @@scraped_students
-  end
+  end # ends method 
 
-  def self.scrape_profile_page(profile_url)
+ def self.scrape_profile_page(profile_url)
+   html = open(profile_url)
+    doc = Nokogiri::HTML(html)
+    s_media = []
+    doc.css(".social-icon-container a").each do |i|
+     s_media.push(i)
+   end
+   s_media.each do |i|
+     @@scraped_profile[:twitter] = i.attr('href') if i.attr('href').include?("twitter")
+     @@scraped_profile[:linkedin] = i.attr('href') if i.attr('href').include?("linkedin")
+     # i.attr('href') do |j|
+      # @@scraped_profile[:twtter] = j if j.include?("twitter")
+      # @@scraped_profile[:linkedin] = j if j.include?("linkedin")
+       #@@scraped_profile[:github] = j if j.include?("github")
+       #@@scraped_profile[:blog] = j if j.include?("blog")
     
-  end
+     end
+   #end
+   binding.pry
+   
+ 
+   
+ end # ends method 
+   
+  
 
-end
+end #ends Class 
